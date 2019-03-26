@@ -1,16 +1,15 @@
 <?php
 
-function checkIsEqualStringPcre(string $str)
+function checkIsEqualStringPcre(string $str): bool
 {
     $pattern = '/abcdefdhsf\^dsdsвВВo\*18340/u';
 
-    $result = preg_match($pattern, $str);
-    if ($result === 1) {
+    $result = preg_match($pattern, $str, $matches);
+
+    if ($result && $matches[0] === $str) {
         $result = true;
-    } elseif ($result === 0) {
-        $result = false;
     } else {
-        $result = 'Error';
+        $result = false;
     }
 
     return $result;
@@ -18,8 +17,8 @@ function checkIsEqualStringPcre(string $str)
 
 function checkIsEqualStringPhp(string $str): bool
 {
-    $originString = 'abcdefdhsf^dsdsвВВo*18340';
-    return $str === $originString;
+    $originStr = 'abcdefdhsf^dsdsвВВo*18340';
+    return $str === $originStr;
 }
 
 var_dump(checkIsEqualStringPcre('abcdefdhsf^dsdsвВВo*18340'));

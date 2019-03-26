@@ -1,16 +1,15 @@
 <?php
 
-function checkIsRightMac(string $str)
+function checkIsRightMac(string $str): bool
 {
-    $pattern = '/([a-fA-F0-9]){2}:([a-fA-F0-9]){2}:([a-fA-F0-9]){2}:([a-fA-F0-9]){2}:([a-fA-F0-9]){2}:([a-fA-F0-9]){2}/';
+    $pattern = '/([a-fA-F\d]){2}:([a-fA-F\d]){2}:([a-fA-F\d]){2}:([a-fA-F\d]){2}:([a-fA-F\d]){2}:([a-fA-F\d]){2}/';
 
     $result = preg_match($pattern, $str, $matches);
+
     if ($result === 1 && $matches[0] === $str) {
         $result = true;
-    } elseif ($result === 0 || ($result === 1 && $matches[0] !== $str)) {
-        $result = false;
     } else {
-        $result = 'Error';
+        $result = false;
     }
 
     return $result;
