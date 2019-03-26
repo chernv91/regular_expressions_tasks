@@ -1,19 +1,9 @@
 <?php
 
-function checkIsValidPasswordPcre(string $str)
+function checkIsValidPasswordPcre(string $str): bool
 {
-    $pattern = '/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z_]{8,})/';
-
-    $result = preg_match($pattern, $str, $matches);
-    if ($result === 1 && $matches[0] === $str) {
-        $result = true;
-    } elseif ($result === 0 || ($result === 1 && $matches[0] !== $str)) {
-        $result = false;
-    } else {
-        $result = 'Error';
-    }
-
-    return $result;
+    $pattern = '/^((?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z_]{8,})$/';
+    return preg_match($pattern, $str) ? true : false;
 }
 
 var_dump(checkIsValidPasswordPcre('C00l_Pass'));

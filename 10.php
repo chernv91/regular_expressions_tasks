@@ -1,19 +1,9 @@
 <?php
 
-function checkIsValidNumberPcre(string $str)
+function checkIsValidNumberPcre(string $str): bool
 {
-    $pattern = '/([1-9]){1}(\d{5})/';
-
-    $result = preg_match($pattern, $str, $matches);
-    if ($result === 1 && $matches[0] === $str) {
-        $result = true;
-    } elseif ($result === 0 || ($result === 1 && $matches[0] !== $str)) {
-        $result = false;
-    } else {
-        $result = 'Error';
-    }
-
-    return $result;
+    $pattern = '/^[1-9][\d]{5}$/';
+    return preg_match($pattern, $str) ? true : false;
 }
 
 function checkIsValidNumberPhp(string $str): bool
@@ -26,7 +16,6 @@ function checkIsValidNumberPhp(string $str): bool
 
     return $result;
 }
-
 
 var_dump(checkIsValidNumberPcre('123456'));
 var_dump(checkIsValidNumberPcre('234567'));
