@@ -2,20 +2,8 @@
 
 function checkIsValidEmailPcre(string $str)
 {
-    $pattern = '/([a-z]){1}([\w]){1,}@([\w]){2,}\.([\w]){2,}/';
-
-    $result = preg_match($pattern, $str, $matches);
-    if ($result === 1 && $matches[0] === $str) {
-
-        $result = true;
-
-    } elseif ($result === 0 || ($result === 1 && $matches[0] !== $str)) {
-        $result = false;
-    } else {
-        $result = 'Error';
-    }
-
-    return $result;
+    $pattern = '/^[a-z\d!#$%&\'*+\/=?^_`{|}~-]+(?:\.[a-z\d!#$%&\'*+\/=?^_`{|}~-]+)*@(?:[a-z\d](?:[a-z\d-]*[a-z\d])?\.)+[a-z\d](?:[a-z\d-]*[a-z\d])?$/';
+    return preg_match($pattern, $str) ? true : false;
 }
 
 function checkIsValidEmailPhp(string $str): bool
@@ -31,7 +19,6 @@ function checkIsValidEmailPhp(string $str): bool
     return $result;
 }
 
-
 var_dump(checkIsValidEmailPcre('mail@mail.ru'));
 var_dump(checkIsValidEmailPcre('valid@megapochta.com'));
 var_dump(checkIsValidEmailPcre('aa@aa.info'));
@@ -41,6 +28,7 @@ var_dump(checkIsValidEmailPcre('Just Text2'));
 var_dump(checkIsValidEmailPcre('val@val'));
 var_dump(checkIsValidEmailPcre('val@val.a.a.a.a'));
 var_dump(checkIsValidEmailPcre('12323123@111[]][]'));
+
 var_dump(checkIsValidEmailPhp('mail@mail.ru'));
 var_dump(checkIsValidEmailPhp('valid@megapochta.com'));
 var_dump(checkIsValidEmailPhp('aa@aa.info'));
