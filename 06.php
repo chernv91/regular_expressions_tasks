@@ -2,18 +2,14 @@
 
 function checkIsValidDatePcre(string $str): bool
 {
-    $pattern = '/^(\d){2}\/(\d){2}\/(\d){4}$/';
+    $pattern = '/^(\d){2}\/(\d){2}\/([1][6-9]|[2-9]\d)(\d){2}$/';
     $result = preg_match($pattern, $str);
 
     if ($result) {
         $dateParts = explode('/', $str);
-
-        if ($dateParts[2] >= 1600 && $dateParts[2] <= 9999 && checkdate($dateParts[1], $dateParts[0], $dateParts[2])) {
-            $result = true;
-        } else {
-            $result = false;
-        }
-
+        $result = checkdate($dateParts[1], $dateParts[0], $dateParts[2]) ? true : false;
+    } else {
+        $result = false;
     }
 
     return $result;
