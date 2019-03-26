@@ -2,17 +2,8 @@
 
 function checkIsEqualStringPcre(string $str): bool
 {
-    $pattern = '/abcdefdhsf\^dsdsвВВo\*18340/u';
-
-    $result = preg_match($pattern, $str, $matches);
-
-    if ($result && $matches[0] === $str) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-
-    return $result;
+    $pattern = '/^abcdefdhsf\^dsdsвВВo\*18340$/u';
+    return preg_match($pattern, $str) ? true : false;
 }
 
 function checkIsEqualStringPhp(string $str): bool

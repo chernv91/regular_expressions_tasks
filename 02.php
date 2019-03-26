@@ -2,17 +2,8 @@
 
 function checkIsGuidPcre(string $str): bool
 {
-    $pattern = '/\{?([a-fA-F\d]){8}-([a-fA-F\d]){4}-([a-fA-F\d]){4}-([a-fA-F\d]){4}-([a-fA-F\d]){12}\}?/';
-
-    $result = preg_match($pattern, $str, $matches);
-
-    if ($result === 1 && $matches[0] === $str) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-
-    return $result;
+    $pattern = '/^\{?([a-fA-F\d]){8}-([a-fA-F\d]){4}-([a-fA-F\d]){4}-([a-fA-F\d]){4}-([a-fA-F\d]){12}\}?$/';
+    return preg_match($pattern, $str) ? true : false;
 }
 
 function checkIsGuidPhp(string $str): bool

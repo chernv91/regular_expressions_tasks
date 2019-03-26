@@ -2,17 +2,8 @@
 
 function checkIsRightMac(string $str): bool
 {
-    $pattern = '/([a-fA-F\d]){2}:([a-fA-F\d]){2}:([a-fA-F\d]){2}:([a-fA-F\d]){2}:([a-fA-F\d]){2}:([a-fA-F\d]){2}/';
-
-    $result = preg_match($pattern, $str, $matches);
-
-    if ($result === 1 && $matches[0] === $str) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-
-    return $result;
+    $pattern = '/^([a-fA-F\d]){2}:([a-fA-F\d]){2}:([a-fA-F\d]){2}:([a-fA-F\d]){2}:([a-fA-F\d]){2}:([a-fA-F\d]){2}$/';
+    return preg_match($pattern, $str) ? true : false;
 }
 
 var_dump(checkIsRightMac('01:32:54:67:89:AB'));
