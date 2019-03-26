@@ -5,12 +5,11 @@ function checkIsValidUrlPcre(string $str)
     $pattern = '/(https?:\/\/)?([a-z]){2,}\.([a-z\-]{2,}[^\-]\.)?([a-z]){2,}([a-z\/:%_\.?#=&\d]{2,})?/';
 
     $result = preg_match($pattern, $str, $matches);
+
     if ($result === 1 && $matches[0] === $str) {
         $result = true;
-    } elseif ($result === 0 || ($result === 1 && $matches[0] !== $str)) {
-        $result = false;
     } else {
-        $result = 'Error';
+        $result = false;
     }
 
     return $result;
