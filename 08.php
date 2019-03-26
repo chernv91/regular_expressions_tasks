@@ -2,17 +2,8 @@
 
 function checkIsValidIpPcre(string $str): bool
 {
-    $pattern = '/(\d){1,3}\.(\d){1,3}\.(\d){1,3}\.(\d){1,3}/';
-
-    $result = preg_match($pattern, $str, $matches);
-
-    if ($result === 1 && $matches[0] === $str) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-
-    return $result;
+    $pattern = '/^(\d){1,3}\.(\d){1,3}\.(\d){1,3}\.(\d){1,3}$/';
+    return preg_match($pattern, $str) ? true : false;
 }
 
 function checkIsValidIpPhp(string $str): bool
