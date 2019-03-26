@@ -2,7 +2,7 @@
 
 function checkIsValidUrlPcre(string $str): bool
 {
-    $pattern = '/^(https?:\/\/)?([a-z]){2,}\.([a-z\-]{2,}[^\-]\.)?([a-z]){2,}([a-z\/:%_\.?#=&\d]{2,})?$/';
+    $pattern = '/^(https?:\/\/)?([a-z\d]){2,}\.([a-z\d\-]{2,}[^\-]\.)?([a-z]){2,}([a-z\/:%_\.?#=&\d]{2,})?$/';
     return preg_match($pattern, $str) ? true : false;
 }
 
