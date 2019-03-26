@@ -1,31 +1,20 @@
 <?php
 
-function checkIsValidUrlPcre(string $str)
+function checkIsValidUrlPcre(string $str): bool
 {
-    $pattern = '/(https?:\/\/)?([a-z]){2,}\.([a-z\-]{2,}[^\-]\.)?([a-z]){2,}([a-z\/:%_\.?#=&\d]{2,})?/';
-
-    $result = preg_match($pattern, $str, $matches);
-
-    if ($result === 1 && $matches[0] === $str) {
-        $result = true;
-    } else {
-        $result = false;
-    }
-
-    return $result;
+    $pattern = '/^(https?:\/\/)?([a-z]){2,}\.([a-z\-]{2,}[^\-]\.)?([a-z]){2,}([a-z\/:%_\.?#=&\d]{2,})?$/';
+    return preg_match($pattern, $str) ? true : false;
 }
 
-function checkIsValidUrlPhp(string $str)
+function checkIsValidUrlPhp(string $str): bool
 {
     $result = true;
-    $url = '';
 
     if (strpos($str, 'http://') === false) {
         $str = "http://$str";
     }
 
     $host = parse_url($str, PHP_URL_HOST);
-
     $arr = explode('.', $host);
 
     foreach ($arr as $item) {
@@ -39,11 +28,15 @@ function checkIsValidUrlPhp(string $str)
 
     if ($result !== false) {
         $url = filter_var($str, FILTER_VALIDATE_URL);
+
+        if (!$url) {
+            $result = false;
+        }
+
     }
 
-    return $url ? true : false;
+    return $result;
 }
-
 
 var_dump(checkIsValidUrlPcre('http://www.zcontest.ru'));
 var_dump(checkIsValidUrlPcre('http://zcontest.ru'));
@@ -55,6 +48,7 @@ var_dump(checkIsValidUrlPcre('zcon.com/index.html#bookmark'));
 var_dump(checkIsValidUrlPcre('Just Text.'));
 var_dump(checkIsValidUrlPcre('http://a.com'));
 var_dump(checkIsValidUrlPcre('http://www.domain-.com'));
+
 var_dump(checkIsValidUrlPhp('http://www.zcontest.ru'));
 var_dump(checkIsValidUrlPhp('http://zcontest.ru'));
 var_dump(checkIsValidUrlPhp('http://zcontest.com'));
